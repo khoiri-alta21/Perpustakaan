@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Chart</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div style="width: 800px; height: 400px; margin: 20px auto; padding: 20px; border: 1px solid #ddd; background-color: #fff;">
+        <canvas id="myChart"></canvas>
+        <div id="chartStatus" style="margin-top: 10px; color: #666;"></div>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var chartStatus = document.getElementById('chartStatus');
+        chartStatus.innerHTML = 'Memulai pembuatan grafik...';
+
+        var ctx = document.getElementById('myChart');
+        var labels = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+        var data = [50, 100, 75, 120, 80, 90, 110, 60, 70, 85];
+
+        console.log('Labels:', labels);
+        console.log('Data:', data);
+
+        try {
+            var chart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Total Koleksi',
+                        data: data,
+                        backgroundColor: 'rgba(75, 192, 192, 0.6)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Total'
+                            }
+                        },
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Grup Klasifikasi'
+                            }
+                        }
+                    },
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Laporan Koleksi Klasifikasi'
+                        }
+                    }
+                }
+            });
+            chartStatus.innerHTML = 'Grafik berhasil dibuat';
+            console.log('Objek grafik:', chart);
+        } catch (error) {
+            chartStatus.innerHTML = 'Error membuat grafik: ' + error.message;
+            console.error('Error lengkap:', error);
+        }
+    });
+    </script>
+</body>
+</html>
